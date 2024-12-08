@@ -3,7 +3,7 @@
 set -e
 
 cd ${13}
-
+echo "Updating&Upgrading the system"
 if [ -n "${11}" ]; then
   apt-get update
   apt-get -y upgrade
@@ -11,6 +11,7 @@ if [ -n "${11}" ]; then
 fi
 
 if [ $1 != 'latest' ]; then
+  echo "Creating pyenv for python version $1"
   pyenv install $1
   pyenv global $1
   pyenv rehash
@@ -22,6 +23,7 @@ else
   pre="--pre"
 fi
 
+echo "Installing poetry - version $2"
 if [ $2 != 'latest' ]; then
   pip install poetry$2 $pre
 else
@@ -36,6 +38,7 @@ if [ -n "${15}" ]; then
   IFS=','
   for arg in ${15}; do
     arg=$(echo "$arg" | xargs)
+    echo "Adding config: $arg"
     poetry config "$arg"
   done
 fi
@@ -44,12 +47,15 @@ if [ -n "${16}" ]; then
   IFS=','  # Set IFS to comma for task2
   for arg in ${16}; do
     arg=$(echo "$arg" | xargs)
+    echo "Adding source: $arg"
     poetry source add "$arg"
   done
 fi
 
+echo "Running poetry install"
 poetry install ${7}
 
+echo "Running poetry build"
 if [ -z $6 ]; then
   poetry build
 else

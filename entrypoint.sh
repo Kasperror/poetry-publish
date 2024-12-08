@@ -1,6 +1,7 @@
-#!/bin/bash
+#!/bin/bash +x
 
 set -e
+set -x
 
 cd ${13}
 echo "Updating&Upgrading the system"

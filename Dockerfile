@@ -1,7 +1,7 @@
 FROM python:slim
 
 ENV PYENV_ROOT=/root/.pyenv
-ENV PATH $PYENV_ROOT/shims:$PYENV_ROOT/bin:$PATH
+ENV PATH=$PYENV_ROOT/shims:$PYENV_ROOT/bin:$PATH
 
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \

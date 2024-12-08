@@ -1,6 +1,6 @@
-name: "Publish python poetry package"
-author: "@JRubics"
-description: "An action to build and publish python package to https://pypi.org/ using poetry https://github.com/sdispater/poetry"
+  name: "Publish python package to pypi-compatible host"
+author: "@Kasperror"
+description: "An action to build and publish poetry-based packages to pypi-compatible host"
 branding:
   icon: "upload-cloud"
   color: "gray-dark"

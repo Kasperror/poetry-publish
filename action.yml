@@ -26,7 +26,7 @@ inputs:
     description: "Username to log in into a repository where the package will be uploaded if using http-basic authentification instead of api token"
     required: false
   repository_password:
-    description: "Password to log in into a repository where the package will be uploaded if using http-basic authentification instead of api token"
+    description: "Password to log in into a repository where the package will be uploaded if using http-basic authentication instead of api token"
     required: false
   build_format:
     description: 'The build format to be used, either "sdist" or "wheel"'
@@ -50,6 +50,13 @@ inputs:
   poetry_publish_options:
     description: 'Adds possibility to pass options to "poetry publish" command'
     required: false
+  poetry_pre_install_config:
+    description: "Adds possibility to run 'poetry config' before poetry install while building. Separate consecutive poetry configs' with commas."
+    required: false
+  poetry_pre_install_sources:
+    description: "Adds possibility to run 'poetry source add' before poetry install while building. Separate consecutive poetry source adds' with commas."
+    required: false
+
 runs:
   using: "docker"
   image: "docker://jrubics/poetry-publish:v2.0"
@@ -68,3 +75,5 @@ runs:
     - ${{ inputs.plugins }}
     - ${{ inputs.package_directory }}
     - ${{ inputs.poetry_publish_options }}
+    - ${{ inputs.poetry_pre_install_config }}
+    - ${{ inputs.poetry_pre_install_sources }}

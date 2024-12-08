@@ -32,6 +32,22 @@ if [ -n "${12}" ]; then
   poetry self add ${12}
 fi
 
+if [ -n "${15}" ]; then
+  IFS=','
+  for arg in ${15}; do
+    arg=$(echo "$arg" | xargs)
+    poetry config "$arg"
+  done
+fi
+
+if [ -n "${16}" ]; then
+  IFS=','  # Set IFS to comma for task2
+  for arg in ${16}; do
+    arg=$(echo "$arg" | xargs)
+    poetry source add "$arg"
+  done
+fi
+
 poetry install ${7}
 
 if [ -z $6 ]; then

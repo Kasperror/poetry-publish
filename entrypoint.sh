@@ -38,18 +38,23 @@ fi
 if [ -n "${15}" ]; then
   IFS=','
   for arg in ${15}; do
+    # Trim spaces around the argument
     arg=$(echo "$arg" | xargs)
-    echo "Adding config: $arg"
-    poetry config "$arg"
+    # Dynamically split the argument into parts
+    read -r -a parts <<< "$arg"
+    # Pass all parts dynamically to poetry config
+    echo "Adding config: ${parts[*]}"
+    poetry config "${parts[@]}"
   done
 fi
 
 if [ -n "${16}" ]; then
   IFS=','  # Set IFS to comma for task2
   for arg in ${16}; do
-    arg=$(echo "$arg" | xargs)
-    echo "Adding source: $arg"
-    poetry source add "$arg"
+    # Split each argument further using whitespace as a delimiter
+    read -r name url <<<"$(echo "$arg" | xargs)"
+    echo "Adding source: $name with URL: $url"
+    poetry source add "$name" "$url"
   done
 fi
 
